@@ -1,14 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import "normalize.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import reportWebVitals from "./reportWebVitals";
+import { GlobalStyles } from "./globalstyles";
+import FirebaseContextProvider from "./context/firebasecontext";
+import LoginContextProvider from "./context/LoginContext";
+import RegisterContextProvider from "./context/RegisterContext";
+import LoggedContextProvider from "./context/loggedstatus";
+import MovieDataContextProvider from "./context/moviedata";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <>
+    <MovieDataContextProvider>
+      <FirebaseContextProvider>
+        <LoggedContextProvider>
+          <RegisterContextProvider>
+            <LoginContextProvider>
+              <GlobalStyles />
+              <App />
+            </LoginContextProvider>
+          </RegisterContextProvider>
+        </LoggedContextProvider>
+      </FirebaseContextProvider>
+    </MovieDataContextProvider>
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function
